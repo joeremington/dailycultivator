@@ -1,0 +1,19 @@
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow users to read admin settings to apply theme
+    match /admin/settings {
+      allow read: if true;
+      // Restrict writes to specific admin emails
+      allow write: if request.auth != null && 
+                  (request.auth.token.email == 'admin@dailycultivator.com' || 
+                   request.auth.token.email.endsWith('@company-admin.com'));
+    }
+    
+    // User specific collections
+    match /users/{userId}/{document=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
