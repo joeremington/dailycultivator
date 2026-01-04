@@ -1,0 +1,7 @@
+{
+  "name": "DailyCultivator",
+  "description": "An intelligent productivity hub for habit tracking, reflective journaling, and AI-prioritized task management.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
